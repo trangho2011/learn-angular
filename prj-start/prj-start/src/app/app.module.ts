@@ -1,6 +1,9 @@
+import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
+import { AuthService } from "./auth/auth/auth.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -15,8 +18,12 @@ import { BackgroundColorDirective } from "./shared/background-color.directive";
 import { BetterBackgroundColorDirective } from "./shared/better-background-color.directive";
 import { ShoppingListService } from "./shopping-list/shopping-list.service";
 import { AppRoutingModule } from "./app-routing.module";
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
+import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
+import { RecipeService } from "./recipes/recipe.service";
+import { ShortenPipe } from "./shared/shorten.pipe";
+import { FilterPipe } from "./shared/filter.pipe";
+import { AuthComponent } from "./auth/auth/auth.component";
 
 @NgModule({
   declarations: [
@@ -33,9 +40,19 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     BetterBackgroundColorDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    ShortenPipe,
+    FilterPipe,
+    AuthComponent,
+    LoadingSpinnerComponent,
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
-  providers: [ShoppingListService],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [ShoppingListService, RecipeService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

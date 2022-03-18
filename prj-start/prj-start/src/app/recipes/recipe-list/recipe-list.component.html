@@ -5,9 +5,21 @@
 </div>
 <hr />
 <div class="row">
+  <div class="col-xs-8">
+    <input type="number" [(ngModel)]="filterRecipeName" />
+  </div>
+  <div class="col-xs-4">Filter Name</div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <h2>Status: {{ appStatus | async }}</h2>
+  </div>
+</div>
+<hr />
+<div class="row">
   <div class="col-xs-12">
     <app-recipe-item
-      *ngFor="let recipeEl of recipes; let i = index"
+      *ngFor="let recipeEl of recipes | filter: filterRecipeName; let i = index"
       [recipe]="recipeEl"
       [index]="i"
     ></app-recipe-item>
